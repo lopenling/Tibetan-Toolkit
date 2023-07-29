@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='Bokit',
-    version='v0.2.1',
+    version='v0.2.2',
     description='Bokit is a Python API that exposes commonly used tools for various Tibetan language workflows.',
     long_description='Bokit is a Python API that exposes commonly used tools for various Tibetan language workflows.',
     url='https://github.com/lopenling/bokit',
