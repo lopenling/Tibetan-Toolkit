@@ -1,6 +1,5 @@
 from bokit.commands.Phonetize import Phonetize
 from bokit.commands.Tokenize import Tokenize
-from bokit.commands.GlossaryMatching import GlossaryMatching
 from bokit.commands.Translate import Translate
 from bokit.commands.TokenStatistics import TokenStatistics
 from bokit.commands.ChatGPT import ChatGPT
