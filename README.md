@@ -4,7 +4,7 @@
   <br>
 </h1>
 
-<h3 align="center">New Project Template</h3>
+<h3 align="center">Bokit</h3>
 
 <p align="center">
   
@@ -23,7 +23,7 @@
 
 ## :floppy_disk: Description
 
-A template repository for all Lopen Ling repos. Replace the content in this section with the title of your project.
+Bokit is a Python API that exposes commonly used tools for various Tibetan language workflows.
 
 ## :grin: Owner
 

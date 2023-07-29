@@ -1,0 +1,7 @@
+pandas
+signs
+openai
+bophono
+botok
+pyewts
+pdf2image
