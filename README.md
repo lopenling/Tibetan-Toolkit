@@ -31,7 +31,7 @@ Bokit is a Python API that exposes commonly used tools for various Tibetan langu
 
 ## :closed_book: Docs
 
-Replace the content in this section with the title of your project.
+NA
 
 ## :speech_balloon: Get Help
 
