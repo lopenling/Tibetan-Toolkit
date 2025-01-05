@@ -5,3 +5,4 @@ bophono
 botok
 pyewts
 pdf2image
+pyperclip
