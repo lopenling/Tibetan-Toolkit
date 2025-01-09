@@ -130,34 +130,37 @@ class Transifex:
 
         return response.text
 
-    def read_text(self, project_slug, resource_slug, auth_token):
+    def read_text(self, project_slug, resource_slug, language_code):
 
         '''Reads text from a transifex project and resource.
         
         project | str | transifex project
         resource | str | transifex resource
-        auth_token | str | transifex auth token
         '''
 
         import requests
         import json
 
-        url = "https://rest.api.transifex.com/teams?filter[organization]=o:"
-        url = url + self.org + ':p:' + project_slug + ':r:' + resource_slug
-        
-        language = '&filter[language]=l:en'
-        includes = '&include=resource_string'
-        limit = '&limit=1000'
-
-        url = url + language + includes + limit
-        
         headers = {
             "accept": "application/vnd.api+json",
             "authorization": "Bearer " + self.auth
         }
 
-        response = requests.get(url, headers=headers)
+        # Get the source strings and meta
+        strings_url = "https://rest.api.transifex.com/resource_strings?filter[resource]=o:"
+        strings_url += self.org + ':p:' + project_slug + ':r:' + resource_slug
+        strings_url += '&limit=1000'
 
-        json = json.loads(response.text)
+        response = requests.get(strings_url, headers=headers)
+        strings_json = json.loads(response.text)
+
+        # Get the translations    
+        translation_url = "https://rest.api.transifex.com/resource_translations?filter[resource]=o:"
+        translation_url += self.org + ':p:' + project_slug + ':r:' + resource_slug
+        translation_url += "&filter[language]=l:" + language_code
+        translation_url += '&limit=1000'
+
+        response = requests.get(translation_url, headers=headers)
+        translation_json = json.loads(response.text)
         
-        return json
+        return strings_json, translation_json

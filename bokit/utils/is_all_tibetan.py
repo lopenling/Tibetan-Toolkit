@@ -5,4 +5,4 @@ def is_all_tibetan(string):
     string | str | string to check if Tibetan or not
     '''
 
-    return all('\u0F00' <= char <= '\u0FFF' for char in string)
+    return all('\u0F00' <= char <= '\u0FFF' for char in string.replace(' ', ''))
