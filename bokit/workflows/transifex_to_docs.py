@@ -6,6 +6,7 @@ def transifex_to_docs(org,
                       template_doc_id,
                       service_account_file,
                       service_account_subject,
+                      document_filename,
                       print_url=False):
 
     '''Transforms Transifex content to a publishable
@@ -22,6 +23,7 @@ def transifex_to_docs(org,
     template_doc_id (str): The Google Docs template ID.
     service_account_file (str): The path to the service account file.
     service_account_subject (str): The email of the service account.
+    document_filename (str): The name of the new document.
     print_url (bool): Whether to print the URL of the document
 
     # Overview
@@ -174,10 +176,9 @@ def transifex_to_docs(org,
     docs_service = build('docs', 'v1', credentials=creds)
 
     # Copy the template document
-    copy_title = "New Document from Template"
     copied_file = drive_service.files().copy(
         fileId=template_doc_id,
-        body={"name": copy_title}
+        body={"name": document_filename}
     ).execute()
 
     # Get the new document ID
