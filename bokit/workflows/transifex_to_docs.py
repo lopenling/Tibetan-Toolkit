@@ -5,6 +5,7 @@ def transifex_to_docs(org,
                       language_code,
                       template_doc_id,
                       service_account_file,
+                      service_account_subject,
                       print_url=False):
 
     '''Transforms Transifex content to a publishable
@@ -20,6 +21,7 @@ def transifex_to_docs(org,
     language_code (str): The language code to fetch.
     template_doc_id (str): The Google Docs template ID.
     service_account_file (str): The path to the service account file.
+    service_account_subject (str): The email of the service account.
     print_url (bool): Whether to print the URL of the document
 
     # Overview
@@ -165,7 +167,7 @@ def transifex_to_docs(org,
     creds = Credentials.from_service_account_file(
         service_account_file,
         scopes=scopes,
-        subject='mailme@mikkokotila.com'
+        subject=service_account_subject
     )
 
     drive_service = build('drive', 'v3', credentials=creds)
