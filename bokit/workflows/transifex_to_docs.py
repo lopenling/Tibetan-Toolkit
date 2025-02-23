@@ -7,6 +7,7 @@ def transifex_to_docs(org,
                       service_account_file,
                       service_account_subject,
                       document_filename,
+                      include_phonetics=False,
                       print_url=False):
 
     '''Transforms Transifex content to a publishable
@@ -24,6 +25,7 @@ def transifex_to_docs(org,
     service_account_file (str): The path to the service account file.
     service_account_subject (str): The email of the service account.
     document_filename (str): The name of the new document.
+    include_phonetics (bool): Whether to include phonetics.
     print_url (bool): Whether to print the URL of the document
 
     # Overview
@@ -112,7 +114,9 @@ def transifex_to_docs(org,
             # If we have accumulated Normal strings, add them to pairs
             if temp_style == "Normal":
 
-                pairs.append([temp_string.strip(), temp_translation.strip(), temp_style])
+                pairs.append([temp_string.strip(),
+                              temp_translation.strip(),
+                              temp_style])
                 temp_string = ""  # Reset the temp variables
                 temp_translation = ""
                 temp_style = None
@@ -122,7 +126,9 @@ def transifex_to_docs(org,
 
     # Handle any remaining Normal entries at the end
     if temp_style == "Normal":
-        pairs.append([temp_string.strip(), temp_translation.strip(), temp_style])
+        pairs.append([temp_string.strip(),
+                      temp_translation.strip(),
+                      temp_style])
 
     # Initialize the pnonetizer
     p = bokit.Phonetize()
@@ -132,20 +138,25 @@ def transifex_to_docs(org,
 
     for i in range(len(pairs)):
 
-        if pairs[i][2] is None:
+        if include_phonetics is True:
 
-            phonetics_temp = []
+            if pairs[i][2] is None:
 
-            tokens = pairs[i][0].split(' ')
+                phonetics_temp = []
 
-            for token in tokens:
+                tokens = pairs[i][0].split(' ')
 
-                phonetic = p.query(token)['phonetic']
-                phonetic = phonetic.replace("é", "e").replace("ü", "u")
+                for token in tokens:
 
-                phonetics_temp.append(phonetic)
+                    phonetic = p.query(token)['phonetic']
+                    phonetic = phonetic.replace("é", "e").replace("ü", "u")
 
-            phonetics_temp = ' '.join(phonetics_temp).lstrip().rstrip()
+                    phonetics_temp.append(phonetic)
+
+                phonetics_temp = ' '.join(phonetics_temp).lstrip().rstrip()
+
+            else:
+                phonetics_temp = ''
 
         else:
             phonetics_temp = ''
