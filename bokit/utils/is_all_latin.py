@@ -7,4 +7,4 @@ def is_all_latin(word):
     
     import unicodedata as ud
     
-    return all(['LATIN' in ud.name(c) for c in word])
+    return all(['LATIN' in ud.name(c) for c in word.strip().replace(' ', '')])

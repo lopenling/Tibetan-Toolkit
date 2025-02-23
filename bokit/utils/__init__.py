@@ -10,3 +10,4 @@ from .clean_tibetan_string import clean_tibetan_string
 from .create_particles_list import create_particles_list
 from .create_punctuation_list import create_punctuation_list
 from .create_special_char_list import create_special_char_list
+from .string_to_segments import string_to_segments
